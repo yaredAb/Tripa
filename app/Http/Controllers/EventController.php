@@ -44,8 +44,6 @@ class EventController extends Controller
     public function store(Request $request)
     {
 
-        dd($request->all());
-
         $user = Auth::user();
         $organizer = $user->organizer;
 
@@ -197,7 +195,7 @@ class EventController extends Controller
         $user = Auth::user();
         $organizer = $user->organizer;
 
-        $events = $organizer->events()->with('organizer')->get();
+        $events = $organizer->events()->with('organizer')->orderBy('created_at', 'desc')->get();
         return view('creator.events', compact('events'));
     }
 

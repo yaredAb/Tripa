@@ -82,6 +82,9 @@
                 </div>
             </div>
 
+            {{-- small description --}}
+            <p class="text-lg font-medium">{{$event->small_description}}</p>
+
             <!-- Description -->
             <p class="text-gray-700 leading-relaxed">{{ $event->long_description }}</p>
 

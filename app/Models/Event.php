@@ -34,8 +34,17 @@ class Event extends Model
         return $this->belongsTo(Organizer::class);
     }
 
-    public function favoriteBy()
+    public function favoritedBy()
     {
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->belongsToMany(User::class, 'favorites', 'event_id', 'user_id')->withTimestamps();
+    }
+
+    public function isFavoritedBy(User $user = null)
+    {
+        if(!$user) {
+            $user = auth()->user();
+        }
+
+        return $user ? $this->favoritedBy->contains($user) : false;
     }
 }
